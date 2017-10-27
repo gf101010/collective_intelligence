@@ -12,7 +12,7 @@ def sim_items(prefs, p1, p2):
 def sim_distance(prefs, p1, p2):
     si = sim_items(prefs, p1, p2)
     # if they have no ratings in common, return 0
-    if len(si): return 0
+    if len(si) == 0: return 0
 
     # add squares of all differences
     sum_of_squares=sum([pow(prefs[p1][item]-prefs[p2][item], 2)
@@ -38,7 +38,7 @@ def sim_pearson(prefs, p1, p2):
     pSum = sum([prefs[p1][it] * prefs[p2][it] for it in si])
 
     # Calculate peason score
-    num = pSum - (sum1 * sum2)
+    num = pSum - (sum1 * sum2 / nb)
     den = sqrt((sum1Sq - pow(sum1, 2)/nb) * (sum2Sq - pow(sum2, 2)/nb))
     if den == 0: return 0
 
@@ -105,7 +105,7 @@ def calculateSimilarItems(prefs, n=10):
         # Status updates for large dataset
         c += 1
         if c % status_update == 0:
-            print "%d / %d" % (c, len(itemPrefs))
+            print("%d / %d", c, len(itemPrefs))
 
         # Find the most similar items to this one
         scores = topMatches(itemPrefs, item, n=n, similarity = sim_distance)
