@@ -47,7 +47,7 @@ def sim_pearson(prefs, p1, p2):
 # Returns the best matches for person from the prefs dictionary.
 # Number of results and similarity function are optional params.
 def topMatches(prefs, person, n=5, similarity=sim_pearson):
-    scores=[(similarity(prefs, person, other), other)
+    scores=[other, (similarity(prefs, person, other))
                     for other in prefs if other != person]
     # Sort the list, highest is first
     scores.sort()
@@ -105,7 +105,7 @@ def calculateSimilarItems(prefs, n=10):
         # Status updates for large dataset
         c += 1
         if c % status_update == 0:
-            print("%d / %d", c, len(itemPrefs))
+            print(c, "/", len(itemPrefs))
 
         # Find the most similar items to this one
         scores = topMatches(itemPrefs, item, n=n, similarity = sim_distance)
