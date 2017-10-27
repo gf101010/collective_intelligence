@@ -47,7 +47,7 @@ def sim_pearson(prefs, p1, p2):
 # Returns the best matches for person from the prefs dictionary.
 # Number of results and similarity function are optional params.
 def topMatches(prefs, person, n=5, similarity=sim_pearson):
-    scores=[other, (similarity(prefs, person, other))
+    scores=[(other, similarity(prefs, person, other))
                     for other in prefs if other != person]
     # Sort the list, highest is first
     scores.sort()
